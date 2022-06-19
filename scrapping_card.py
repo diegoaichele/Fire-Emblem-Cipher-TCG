@@ -98,3 +98,18 @@ for category in category_list:
                     print(the_card_code,"  -   " ,card_name)
                     continue
 
+                download_img(card_image_url, the_card_code )
+                # Insert Card
+                cur.execute( insert_card, ( the_card_code , card_name, card_image_url, card_class, card_cost,
+                                        card_symbol1, card_symbol2, card_attack, card_support, card_range,
+                                        card_quote, card_illustrator, card_comment))
+
+                #  Insert Skill
+                for the_skill in list_skill:
+                    cur.execute( insert_skill, (the_card_code,the_skill) )
+                
+                # Insert affinities
+                for the_affinities in card_list_affinities:
+                    cur.execute( insert_affinities, (the_card_code,the_affinities) )
+
+            con.commit()
