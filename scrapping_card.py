@@ -89,17 +89,22 @@ for category in category_list:
                               "Lukas: Messenger from the Deliverance":"B09-018N",
                               "Est: Little Macedonian Pegasus": "B15-021N",
                               "Palla: Greenwind Dracoknight": "B15-022R",
-                              "Sonya: Unfond of the Ugly" : "B16-056HN"
+                              "Sonya: Unfond of the Ugly" : "B16-056HN",
+                              "Keaton: Wolfskin Dwelling on Mount Garou": "B17-058N",
+                              "Leo: Gravity Master" : "S04-004ST",
+                              "Rolf: Petite Archer" : "B03-017N",
+                              "Yuzu: Purple-Gleaming Protector" : "B09-075N",
+                              "Sigurd: Paladin of Grannvale" : "P05-001PR",
+                              "Sylvain: Debauching Son of House Gautier" : "B19-027N"
                               }
                 
                 if card_name in debug_dict.keys():
                     the_card_code = debug_dict[card_name]
                 
-                # TODO: corregir 
-                # #S04-002STsigned   -    Xander: Crown Prince of Nohr
-                # #S04-002ST+signed   -    Xander: Crown Prince of Nohr
-                # B02-090Nsigned   -    Keaton: Leader of the Wolfskins
-                # Geoffrey: Lancer General ERRATE y PRE ERRATE
+                
+                if the_card_code == "B05-082SR":
+                    the_card_code = "B05-082RPre-Errata"
+                    
                 
                 if card_name == "Lucina: Brand-Bearing Maiden" and the_card_code == "P16-001PR":
                     the_card_code = "P16-002PR"
@@ -109,6 +114,15 @@ for category in category_list:
                         the_card_code += "signed"
                         print(the_card_code,"  -   " ,card_name)
                      
+                
+                if the_card_code == "B05-082RPre-Erratasigned":
+                    the_card_code = "B05-082R"
+                    
+                if the_card_code == "P10-006PRsigned":
+                    continue
+                
+                if card_image_url == "https://s3-wiki.serenesforest.net/d/d2/B11-081.png":
+                    the_card_code = "B11-081HN"
                     
                 for row in cur.execute(" Select * from card where ID=:ID", {"ID": the_card_code}):
                     if row[0] == the_card_code:
