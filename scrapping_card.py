@@ -83,6 +83,26 @@ for category in category_list:
             for the_card_code in list_card_code:
                   
                 no_pass = False
+                        
+                debug_dict = { "Palla: Elder Macedonian Pegasus" :"B15-023N", 
+                              "Kliff: Surly Passion":"B09-014N",
+                              "Lukas: Messenger from the Deliverance":"B09-018N",
+                              "Est: Little Macedonian Pegasus": "B15-021N",
+                              "Palla: Greenwind Dracoknight": "B15-022R",
+                              "Sonya: Unfond of the Ugly" : "B16-056HN"
+                              }
+                
+                if card_name in debug_dict.keys():
+                    the_card_code = debug_dict[card_name]
+                
+                # TODO: corregir 
+                # #S04-002STsigned   -    Xander: Crown Prince of Nohr
+                # #S04-002ST+signed   -    Xander: Crown Prince of Nohr
+                # B02-090Nsigned   -    Keaton: Leader of the Wolfskins
+                # Geoffrey: Lancer General ERRATE y PRE ERRATE
+                
+                if card_name == "Lucina: Brand-Bearing Maiden" and the_card_code == "P16-001PR":
+                    the_card_code = "P16-002PR"
                     
                 for row in cur.execute(" Select * from card where ID=:ID", {"ID": the_card_code}):
                     if row[0] == the_card_code:
