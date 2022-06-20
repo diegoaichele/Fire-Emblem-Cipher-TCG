@@ -1,8 +1,10 @@
-
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 import sqlite3
 
 
+app = FastAPI()
+
+         
 con = sqlite3.connect('cipher_fireemblem.db' , check_same_thread=False)
 cur = con.cursor()
 
@@ -35,7 +37,7 @@ def read_item(card_id: str):
         index += 1
         break
     if index == 0:
-        return {"status": "404", "comment": "card not found"}
+        raise HTTPException(status_code=404, detail="Card not found")
     skills = cur.execute(select_skill, (card_id,) )
     card_dict["skills"] = [i[1] for i in skills]
     affinities = cur.execute(select_affinities, (card_id,) )
